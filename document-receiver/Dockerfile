@@ -10,5 +10,5 @@ RUN mvn -f /usr/src/app/pom.xml clean package
 
 # from build machine copy jar and execute
 FROM openjdk:8-jdk-alpine3.9
-COPY --from=build /usr/src/app/target/document-receiver-0.0.1-SNAPSHOT.jar /usr/app/document-receiver-0.0.1-SNAPSHOT.jar  
-ENTRYPOINT ["java","-jar","/usr/app/document-receiver-0.0.1-SNAPSHOT.jar"]
+COPY --from=build /usr/src/app/target/document-receiver.jar /usr/app/document-receiver.jar  
+ENTRYPOINT ["java","-jar","/usr/app/document-receiver.jar"]
