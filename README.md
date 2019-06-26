@@ -1,2 +1,9 @@
-# jrcc_document_receiver
-Document Receiving Service 
+# JRCC Document Receiver
+
+A Java Spring Boot Application
+
+## Road Map
+
+* [ ] Receive Documents
+* [ ] Store Documents
+* [ ] Publish Notifications
