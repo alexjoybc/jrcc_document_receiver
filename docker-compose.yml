@@ -1,0 +1,11 @@
+version: '3'
+services:
+  ####################### Document Receiver Definition #######################
+  document-receiver:
+    build:
+      context: ./document-receiver
+    networks:
+      - justin-rcc
+networks: 
+  justin-rcc:
+    driver: "bridge"
