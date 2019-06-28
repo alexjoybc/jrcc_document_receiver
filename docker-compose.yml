@@ -3,7 +3,7 @@ services:
   ####################### Document Receiver Definition #######################
   document-receiver:
     build:
-      context: ./document-receiver
+      context: ./jrcc-document-receiver
     networks:
       - justin-rcc
 networks: 
