@@ -39,6 +39,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>document-receiver</finalName> <!-- Set final name for easier referencing -->
 	</build>
 
 </project>
