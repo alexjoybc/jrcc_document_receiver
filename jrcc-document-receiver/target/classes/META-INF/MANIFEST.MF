@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: jrcc-document-receiver
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: 177226
+Implementation-Vendor-Id: ca.gov.bc.open
+Build-Jdk: 1.8.0_211
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/jrcc-document-receiver
+Created-By: Maven Integration for Eclipse
+
