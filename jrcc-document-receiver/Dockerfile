@@ -1,4 +1,21 @@
-FROM maven:3.6.1-jdk-8-alpine AS build  
+FROM maven:3.6.1-jdk-8 AS build  
+
+RUN mkdir github
+WORKDIR /github
+
+RUN git clone https://github.com/bcgov/jrcc-document-access-libs.git
+WORKDIR /github/jrcc-document-access-libs
+
+WORKDIR /github/jrcc-document-access-libs/jrcc-document-access-libs
+RUN mvn install
+
+WORKDIR /github/jrcc-document-access-libs/jrcc-access-spring-boot-autoconfigure
+RUN mvn install
+
+WORKDIR /github/jrcc-document-access-libs/jrcc-access-spring-boot-starter
+RUN mvn install
+
+WORKDIR /
 
 # copy pom.xml and get the dependencies
 COPY pom.xml /usr/src/app/pom.xml
@@ -10,5 +27,12 @@ RUN mvn -f /usr/src/app/pom.xml clean package
 
 # from build machine copy jar and execute
 FROM openjdk:8-jdk-alpine3.9
-COPY --from=build /usr/src/app/target/document-receiver.jar /usr/app/document-receiver.jar  
+
+ARG REDIS_HOST
+ARG REDIS_PORT
+
+ENV REDIS_HOST=${REDIS_HOST}
+ENV REDIS_PORT=${REDIS_PORT}
+
+COPY --from=build /usr/src/app/target/document-receiver.jar /usr/app/document-receiver.jar
 ENTRYPOINT ["java","-jar","/usr/app/document-receiver.jar"]
