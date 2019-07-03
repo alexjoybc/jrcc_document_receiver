@@ -20,14 +20,17 @@ public class DocumentController {
 
 	private Logger logger = LoggerFactory.getLogger(DocumentController.class);
 	
-
+	/**
+	 * Default constructor
+	 * @param storageService A Storage service
+	 */
 	public DocumentController(StorageService storageService) {
 		this.storageService = storageService;
 	}
 
 	/**
 	 * Post a new document
-	 * @param content
+	 * @param content The content of the document
 	 */
 	public DocumentStorageProperties post(String content) {
 

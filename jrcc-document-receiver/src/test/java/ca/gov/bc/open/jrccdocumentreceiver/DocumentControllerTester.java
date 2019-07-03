@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import ca.gov.bc.open.jrccaccess.libs.DocumentStorageProperties;
 import ca.gov.bc.open.jrccaccess.libs.StorageService;
@@ -26,6 +27,7 @@ public class DocumentControllerTester {
 	@Before
 	public void init() {
 		
+		MockitoAnnotations.initMocks(this);
 		Mockito.when(storageService.putString(Mockito.anyString())).thenReturn(new DocumentStorageProperties(KEY, MD5));
 		sut = new DocumentController(storageService);
 	}

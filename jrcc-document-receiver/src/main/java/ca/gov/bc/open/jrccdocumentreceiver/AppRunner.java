@@ -1,6 +1,12 @@
 package ca.gov.bc.open.jrccdocumentreceiver;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 import org.slf4j.Logger;
@@ -35,15 +41,14 @@ public class AppRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		File resource = resourceFile.getFile();
-		String contentString = new String(Files.readAllBytes(resource.toPath()));
+		String contentString = new String(getSourceXml());
 
 		Span newSpan = tracer.nextSpan().name("ReceiveDocument").start();
 
 		try (SpanInScope ws = tracer.withSpanInScope(newSpan.start())) {
 
 			DocumentStorageProperties props = this.documentController.post(contentString);
-			
+
 			logger.info("Document successfully stored, key: " + props.getKey());
 
 		} catch (RedisConnectionFailureException e) {
@@ -52,11 +57,33 @@ public class AppRunner implements CommandLineRunner {
 			throw e;
 
 		} finally {
-
 			newSpan.finish();
-
 		}
 
+	}
+
+	public String getSourceXml() {
+
+		StringBuilder stringBuilder = new StringBuilder();
+
+		InputStream inputStream;
+		try {
+			inputStream = resourceFile.getInputStream();
+
+			String line = null;
+
+			try (BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+				while ((line = bufferedReader.readLine()) != null) {
+					stringBuilder.append(line);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return stringBuilder.toString();
 	}
 
 }

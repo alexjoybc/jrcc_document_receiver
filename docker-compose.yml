@@ -4,8 +4,26 @@ services:
   document-receiver:
     build:
       context: ./jrcc-document-receiver
+      args: 
+        REDIS_HOST: redis
+        REDIS_PORT: 6379
     networks:
       - justin-rcc
+    depends_on: 
+      - redis
+
+  ####################### REDIS SERVER ######################################
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ../data/redis:/data
+    restart: always
+    networks:
+      - justin-rcc
+
 networks: 
   justin-rcc:
     driver: "bridge"
