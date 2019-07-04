@@ -4,3 +4,12 @@ spring:
    redis:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
+   rabbitmq:
+      host: ${RABBITMQ_HOST}
+      port: ${RABBITMQ_PORT}
+      username: ${RABBITMQ_USERNAME}
+      password: ${RABBITMQ_PASSWORD}
+bcgov:
+   access:
+      publish:
+         document-type: procecution-report

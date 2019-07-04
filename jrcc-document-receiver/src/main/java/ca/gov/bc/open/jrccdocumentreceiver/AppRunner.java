@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.stereotype.Component;
@@ -43,7 +44,6 @@ public class AppRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 
 		Span newSpan = tracer.nextSpan().name("ReceiveDocument").start();
 
