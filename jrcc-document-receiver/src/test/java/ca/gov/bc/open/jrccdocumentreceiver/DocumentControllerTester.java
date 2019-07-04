@@ -3,14 +3,18 @@ package ca.gov.bc.open.jrccdocumentreceiver;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDateTime;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import ca.gov.bc.open.jrccaccess.libs.DocumentOutput;
 import ca.gov.bc.open.jrccaccess.libs.DocumentStorageProperties;
 import ca.gov.bc.open.jrccaccess.libs.StorageService;
+import ca.gov.bc.open.jrccaccess.libs.TransactionInfo;
 
 public class DocumentControllerTester {
 
@@ -20,7 +24,7 @@ public class DocumentControllerTester {
 	private static final String KEY = "key";
 
 	@Mock
-	private StorageService storageService;
+	private DocumentOutput documentOutput;
 	
 	private DocumentController sut;
 	
@@ -28,21 +32,15 @@ public class DocumentControllerTester {
 	public void init() {
 		
 		MockitoAnnotations.initMocks(this);
-		Mockito.when(storageService.putString(Mockito.anyString())).thenReturn(new DocumentStorageProperties(KEY, MD5));
-		sut = new DocumentController(storageService);
+		Mockito.doNothing().when(this.documentOutput).send(Mockito.anyString(), Mockito.any());
+		sut = new DocumentController(documentOutput);
 	}
 	
 	
 	@Test
 	public void with_valid_content_should_be_handled() {
-		
-		
-		DocumentStorageProperties props = sut.post("awesome content");
-		
-		assertEquals(KEY, props.getKey());
-		assertEquals(MD5, props.getMD5());
-		
-		
+		sut.post("awesome content", new TransactionInfo("test.txt", "jrcc-receiver", LocalDateTime.now()));
+
 	}
 	
 	

@@ -1,6 +1,6 @@
 # JRCC Document Receiver
 
-A Java Spring Boot Application
+A Receiver application that can store a document and publish a message that a document is ready to be processed
 
 # Run
 
@@ -48,10 +48,10 @@ Get v0.0.1
 
 ```bash
 cd jrcc-document-access-libs
-git checkout v0.0.1
+git checkout v0.1.0
 ```
 
-Install the libs using the [following instructions](https://github.com/bcgov/jrcc-document-access-libs/blob/v0.0.1/README.md)
+Install the libs using the [following instructions](https://github.com/bcgov/jrcc-document-access-libs/blob/v0.1.0/README.md)
 
 Set environment variables specified in `jrcc-document-receiver\src\main\resources\application.yml`
 
@@ -71,4 +71,4 @@ mvn spring-boot:run
 
 * [ ] Receive Documents
 * [X] Store Documents
-* [ ] Publish Notifications
+* [X] Publish Notifications
