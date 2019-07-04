@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,8 @@ import brave.Span;
 import brave.Tracer;
 import brave.Tracer.SpanInScope;
 import ca.gov.bc.open.jrccaccess.libs.DocumentStorageProperties;
+import ca.gov.bc.open.jrccaccess.libs.TransactionInfo;
+import ca.gov.bc.open.jrccaccess.libs.services.ServiceUnavailableException;
 
 @Component
 public class AppRunner implements CommandLineRunner {
@@ -41,19 +45,19 @@ public class AppRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		String contentString = new String(getSourceXml());
-
 		Span newSpan = tracer.nextSpan().name("ReceiveDocument").start();
 
+		TransactionInfo transactionInfo = new TransactionInfo(resourceFile.getFilename(), "jrcc-receiver", LocalDateTime.now());
+		
 		try (SpanInScope ws = tracer.withSpanInScope(newSpan.start())) {
+			
+			documentController.post(new String(getSourceXml()), transactionInfo);
 
-			DocumentStorageProperties props = this.documentController.post(contentString);
+			logger.info("Document successfully sent.");
 
-			logger.info("Document successfully stored, key: " + props.getKey());
+		} catch (ServiceUnavailableException e) {
 
-		} catch (RedisConnectionFailureException e) {
-
-			logger.error("redis serivce not available");
+			logger.error(e.getMessage());
 			throw e;
 
 		} finally {
