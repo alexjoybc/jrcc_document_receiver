@@ -4,6 +4,8 @@ RUN mkdir github
 WORKDIR /github
 
 RUN git clone https://github.com/bcgov/jrcc-document-access-libs.git
+RUN get checkout v0.1.0
+
 WORKDIR /github/jrcc-document-access-libs
 
 WORKDIR /github/jrcc-document-access-libs/jrcc-document-access-libs
