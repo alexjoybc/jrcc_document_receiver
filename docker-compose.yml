@@ -11,6 +11,8 @@ services:
         RABBITMQ_PORT: 5672
         RABBITMQ_USERNAME: guest
         RABBITMQ_PASSWORD: guest
+    ports:
+      - "5050:8080"
     networks:
       - justin-rcc
     depends_on: 
@@ -24,7 +26,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ../data/redis:/data
+      - data-redis:/data
     restart: always
     networks:
       - justin-rcc
@@ -35,14 +37,33 @@ services:
     container_name: rabbitmq
     hostname: rabbitmq
     ports:
-        - 5672:5672
-        - 15672:15672
+      - 5672:5672
+      - 15672:15672
     volumes:
-        - ../data/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit@app-rabbitmq:cached
+        - data-rabbit:/var/lib/rabbitmq/mnesia/rabbit@app-rabbitmq:cached
     restart: always
+    networks:
+      - justin-rcc
+
+  ####################### REDIS COMMANDER ######################################
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
     networks:
       - justin-rcc
 
 networks: 
   justin-rcc:
     driver: "bridge"
+
+volumes:
+  data-rabbit:
+    external: false
+  data-redis:
+    external: false

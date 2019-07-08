@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Implementation-Title: jrcc-document-receiver
-Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Version: 0.1.0
 Built-By: 177226
 Implementation-Vendor-Id: ca.gov.bc.open
 Build-Jdk: 1.8.0_211
