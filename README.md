@@ -69,6 +69,7 @@ mvn spring-boot:run
 
 ## Road Map
 
-* [ ] Receive Documents
+* [X] Receive Documents
 * [X] Store Documents
 * [X] Publish Notifications
+* [ ] Validate documents

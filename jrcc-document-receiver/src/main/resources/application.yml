@@ -13,3 +13,5 @@ bcgov:
    access:
       publish:
          document-type: procecution-report
+      input: http
+      output: rabbitmq
