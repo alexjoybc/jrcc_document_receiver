@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>ca.gov.bc.open</groupId>
 	<artifactId>jrcc-document-receiver</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<name>jrcc-document-receiver</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>ca.gov.bc.open</groupId>
 			<artifactId>jrcc-access-spring-boot-starter</artifactId>
-			<version>0.1.0</version>
+			<version>0.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
