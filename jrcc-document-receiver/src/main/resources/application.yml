@@ -10,8 +10,10 @@ spring:
       username: ${RABBITMQ_USERNAME}
       password: ${RABBITMQ_PASSWORD}
 bcgov:
-   access:
-      publish:
-         document-type: procecution-report
-      input: http
-      output: rabbitmq
+  access:
+    input: http
+    output:
+      document-type: prosecution-report
+      plugin: rabbitmq
+      rabbitmq:
+         ttl: 1

@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>ca.gov.bc.open</groupId>
 			<artifactId>jrcc-access-spring-boot-starter</artifactId>
-			<version>0.2.1</version>
+			<version>0.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

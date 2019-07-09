@@ -28,11 +28,11 @@ Clone [bcgov/jrcc-document-access-libs](https://github.com/bcgov/jrcc-document-a
 git clone https://github.com/bcgov/jrcc-document-access-libs
 ```
 
-Get v0.2.1
+Get v0.3.3
 
 ```bash
 cd jrcc-document-access-libs
-git checkout v0.2.1
+git checkout v0.3.3
 ```
 
 Install the libs using the [following instructions](https://github.com/bcgov/jrcc-document-access-libs/blob/v0.2.1/README.md)

@@ -7,12 +7,9 @@ RUN git clone https://github.com/bcgov/jrcc-document-access-libs.git
 
 # Get and install the jrcc-document-access-libs
 WORKDIR /github/jrcc-document-access-libs
-RUN git checkout v0.2.1
+RUN git checkout v0.3.3
 
-RUN mvn install -f /github/jrcc-document-access-libs/jrcc-document-access-libs/pom.xml
-RUN mvn install -f /github/jrcc-document-access-libs/jrcc-access-api/pom.xml
-RUN mvn install -f /github/jrcc-document-access-libs/jrcc-access-spring-boot-autoconfigure/pom.xml
-RUN mvn install -f /github/jrcc-document-access-libs/jrcc-access-spring-boot-starter/pom.xml
+RUN mvn clean install
 
 WORKDIR /
 
