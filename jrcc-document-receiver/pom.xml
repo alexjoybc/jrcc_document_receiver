@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>ca.gov.bc.open</groupId>
 	<artifactId>jrcc-document-receiver</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<name>jrcc-document-receiver</name>
 	<description>Demo project for Spring Boot</description>
 
